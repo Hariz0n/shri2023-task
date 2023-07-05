@@ -119,13 +119,12 @@ export const Main = () => {
 	const initedRef = React.useRef(false);
 	const [activeTab, setActiveTab] = React.useState('');
 	const [hasRightScroll, setHasRightScroll] = React.useState(false);
-	//
 	React.useEffect(() => {
 		if (!activeTab && !initedRef.current) {
 			initedRef.current = true;
 			setActiveTab(new URLSearchParams(location.search).get('tab') || 'all');
 		}
-	});
+	}, [activeTab]);
 
 	const onSelectInput = event => {
 		setActiveTab(event.target.value);
@@ -138,13 +137,13 @@ export const Main = () => {
 
 	React.useEffect(() => {
 		const sumWidth = sizes.reduce((acc, item) => acc + item.width, 0);
-		const sumHeight = sizes.reduce((acc, item) => acc + item.height, 0);
+		// const sumHeight = sizes.reduce((acc, item) => acc + item.height, 0);
 
 		const newHasRightScroll = sumWidth > ref.current.offsetWidth;
 		if (newHasRightScroll !== hasRightScroll) {
 			setHasRightScroll(newHasRightScroll);
 		}
-	});
+	}, [sizes, hasRightScroll]);
 
 	const onArrowCLick = () => {
 		const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
