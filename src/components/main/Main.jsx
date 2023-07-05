@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import './Main.css'
 import {Event} from "../event/Event.jsx";
 
